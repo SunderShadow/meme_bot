@@ -1,0 +1,11 @@
+{
+    "require": {
+        "php": "^8.3",
+        "nutgram/nutgram": "^4.27"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/"
+        }
+    }
+}
