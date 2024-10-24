@@ -1,3 +1,3 @@
 CREATE TABLE chats(
-    id int PRIMARY KEY
+    id bigint unsigned unique PRIMARY KEY
 )

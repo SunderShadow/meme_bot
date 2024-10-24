@@ -11,7 +11,7 @@ class SendMeme extends Conversation
 {
     public function start(Nutgram $bot)
     {
-        if ($bot->message()->from->username !== $_ENV['bot_owner_username']) {
+        if (!in_array($bot->message()->from->username, $_ENV['bot_privileged_users'])) {
             $this->end();
             return;
         }
@@ -22,12 +22,14 @@ class SendMeme extends Conversation
 
     public function send(Nutgram $bot)
     {
-        $users = Chat::all();
-        $bot->sendMessage('Отправляю ' . count($users) . ' пользователям...');
+        $chats = Chat::all();
+        $bot->sendMessage('Отправляю ' . count($chats) - 1 .' пользователям...');
 
         $success = 0;
-        foreach ($users as $user) {
-            $success += $bot->message()->copy($user->id) instanceof MessageId;
+        foreach ($chats as $chat) {
+            if ($bot->chatId() !== $chat->id) {
+                $success += $bot->message()->copy($chat->id) instanceof MessageId;
+            }
         }
 
         $bot->sendMessage("Отправил $success пользователям");

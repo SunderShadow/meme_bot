@@ -1,4 +1,4 @@
-# Setup
+hp # Setup
 
 1. Migrate `migration.sql` file
 2. Copy `env.example.php -> env.php`
